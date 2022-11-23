@@ -26,17 +26,17 @@ public class ControlaJogador : MonoBehaviour, IMatavel, ICuravel
     void Update()
     {
 
-        float eixoX = Input.GetAxis("Horizontal");
-        float eixoZ = Input.GetAxis("Vertical");
+        //float eixoX = Input.GetAxis("Horizontal");
+        //float eixoZ = Input.GetAxis("Vertical");
 
-        direcao = new Vector3(eixoX, 0, eixoZ);
+        //direcao = new Vector3(eixoX, 0, eixoZ);
 
         animacaoJogador.Movimentar(direcao.magnitude);
     }
 
     void FixedUpdate()
     {
-        meuMovimentoJogador.Movimentar(direcao, statusJogador.Velocidade);
+        meuMovimentoJogador.Movimentar(statusJogador.Velocidade);
 
         meuMovimentoJogador.RotacaoJogador(MascaraChao);
     }

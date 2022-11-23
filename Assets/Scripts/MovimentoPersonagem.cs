@@ -6,12 +6,24 @@ public class MovimentoPersonagem : MonoBehaviour
 {
     private Rigidbody meuRigidbody;
 
+    private Vector3 direcao;
+
     void Awake ()
     {
         meuRigidbody = GetComponent<Rigidbody>();
     }
 
-    public void Movimentar (Vector3 direcao, float velocidade)
+    public void SetDirecao(Vector2 direcao)
+    {
+        this.direcao = new Vector3(direcao.x, 0, direcao.y);
+    }
+
+    public void SetDirecao(Vector3 direcao)
+    {
+        this.direcao = direcao;
+    }
+
+    public void Movimentar (float velocidade)
     {
         meuRigidbody.MovePosition(
                 meuRigidbody.position +
