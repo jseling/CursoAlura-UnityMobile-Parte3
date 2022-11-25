@@ -17,6 +17,13 @@ public class ControlaChefe : MonoBehaviour, IMatavel
     public Color CorDaVidaMaxima, CorDaVidaMinima;
     public GameObject ParticulaSangueZumbi;
 
+    private ReservaFixa reserva;
+
+    public void SetReserva(ReservaFixa reserva)
+    {
+        this.reserva = reserva;
+    }
+
     private void Start()
     {
         jogador = GameObject.FindWithTag("Jogador").transform;

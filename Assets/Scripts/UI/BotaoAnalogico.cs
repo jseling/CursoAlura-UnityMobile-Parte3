@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 
-public class BotaoAnalogico : MonoBehaviour, IDragHandler
+public class BotaoAnalogico : MonoBehaviour, IDragHandler, IPointerUpHandler, IPointerDownHandler
 {
     [SerializeField]
     private RectTransform imagemFundo;
@@ -14,7 +14,7 @@ public class BotaoAnalogico : MonoBehaviour, IDragHandler
     private RectTransform imagemBolinha;
 
     [SerializeField]
-    private MeuEventoDinamicoVector2 onChange;
+    private UnityEvent<Vector2> onChange;
 
 
     public void OnDrag(PointerEventData eventData)
@@ -45,7 +45,7 @@ public class BotaoAnalogico : MonoBehaviour, IDragHandler
     private void PosicionarJoystick(Vector2 posicaoMouse)
     {
         imagemBolinha.localPosition = posicaoMouse * TamanhoImagem();
-        Debug.Log(posicaoMouse);
+        //Debug.Log(posicaoMouse);
     }
 
     private Vector2 CalcularPosicaoMouse(PointerEventData eventData)
@@ -61,7 +61,18 @@ public class BotaoAnalogico : MonoBehaviour, IDragHandler
 
         return posicao;
     }
+
+    public void OnPointerUp(PointerEventData eventData)
+    {
+        PosicionarJoystick(Vector2.zero);
+        onChange.Invoke(Vector2.zero);
+    }
+
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        OnDrag(eventData);
+    }
 }
 
-[Serializable]
-public class MeuEventoDinamicoVector2 : UnityEvent<Vector2> { }
+//[Serializable]
+//public class MeuEventoDinamicoVector2 : UnityEvent<Vector2> { }

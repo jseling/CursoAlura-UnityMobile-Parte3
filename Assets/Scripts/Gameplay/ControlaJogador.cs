@@ -31,14 +31,14 @@ public class ControlaJogador : MonoBehaviour, IMatavel, ICuravel
 
         //direcao = new Vector3(eixoX, 0, eixoZ);
 
-        animacaoJogador.Movimentar(direcao.magnitude);
+        animacaoJogador.Movimentar(meuMovimentoJogador.Direcao.magnitude);
     }
 
     void FixedUpdate()
     {
         meuMovimentoJogador.Movimentar(statusJogador.Velocidade);
 
-        meuMovimentoJogador.RotacaoJogador(MascaraChao);
+        meuMovimentoJogador.RotacaoJogador();
     }
 
     public void TomarDano (int dano)

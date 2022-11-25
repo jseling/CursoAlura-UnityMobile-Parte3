@@ -2,11 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bala : MonoBehaviour {
+public class Bala : MonoBehaviour, IReservavel
+{
 
     public float Velocidade = 20;
     private Rigidbody rigidbodyBala;
     public AudioClip SomDeMorte;
+
+    private ReservaFixa reserva;
 
     private void Start()
     {
@@ -38,5 +41,10 @@ public class Bala : MonoBehaviour {
         }
 
         Destroy(gameObject);
+    }
+
+    public void SetReserva(ReservaFixa reserva)
+    {
+        this.reserva = reserva;
     }
 }
