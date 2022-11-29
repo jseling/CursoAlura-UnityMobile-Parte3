@@ -21,18 +21,23 @@ public class ControlaInimigo : MonoBehaviour, IMatavel, IReservavel
     public GeradorZumbis meuGerador;
     public GameObject ParticulaSangueZumbi;
 
-    private ReservaFixa reserva;
+    private IReserva reserva;
 
-	public void SetReserva(ReservaFixa reserva)
+	public void SetReserva(IReserva reserva)
     {
         this.reserva = reserva;
     }
-	void Start () {
-        Jogador = GameObject.FindWithTag("Jogador");
+
+    void Awake()
+    {
         animacaoInimigo = GetComponent<AnimacaoPersonagem>();
         movimentaInimigo = GetComponent<MovimentoPersonagem>();
-        AleatorizarZumbi();
         statusInimigo = GetComponent<Status>();
+    }
+
+	void Start () {
+        Jogador = GameObject.FindWithTag("Jogador");
+        AleatorizarZumbi();
         scriptControlaInterface = GameObject.FindObjectOfType(typeof(ControlaInterface)) as ControlaInterface;
     }
 
@@ -139,5 +144,18 @@ public class ControlaInimigo : MonoBehaviour, IMatavel, IReservavel
         {
             Instantiate(KitMedicoPrefab, transform.position, Quaternion.identity);
         }
+    }
+
+    public void AoEntrarNaReserva()
+    {
+        movimentaInimigo.Reiniciar();
+        enabled = true;
+        gameObject.SetActive(false);
+
+    }
+
+    public void AoSairDaReserva()
+    {
+        gameObject.SetActive(true);
     }
 }

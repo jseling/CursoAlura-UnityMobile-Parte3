@@ -15,7 +15,7 @@ public class ControlaJogador : MonoBehaviour, IMatavel, ICuravel
     private AnimacaoPersonagem animacaoJogador;
     public Status statusJogador;
 
-    private void Start()
+    private void Awake()
     {
         meuMovimentoJogador = GetComponent<MovimentoJogador>();
         animacaoJogador = GetComponent<AnimacaoPersonagem>();

@@ -9,7 +9,7 @@ public class Bala : MonoBehaviour, IReservavel
     private Rigidbody rigidbodyBala;
     public AudioClip SomDeMorte;
 
-    private ReservaFixa reserva;
+    private IReserva reserva;
 
     private void Start()
     {
@@ -40,11 +40,27 @@ public class Bala : MonoBehaviour, IReservavel
             break;
         }
 
-        Destroy(gameObject);
+        //Destroy(gameObject);
+        VoltarParaReserva();
     }
 
-    public void SetReserva(ReservaFixa reserva)
+    private void VoltarParaReserva()
+    {
+        reserva.DevolverObjeto(gameObject);
+    }
+
+    public void SetReserva(IReserva reserva)
     {
         this.reserva = reserva;
+    }
+
+    public void AoEntrarNaReserva()
+    {
+        gameObject.SetActive(false);
+    }
+
+    public void AoSairDaReserva()
+    {
+        gameObject.SetActive(true);
     }
 }

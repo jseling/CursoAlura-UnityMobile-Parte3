@@ -4,21 +4,37 @@ using UnityEngine;
 
 public class ControlaArma : MonoBehaviour {
 
-    public GameObject Bala;
+    //public GameObject Bala;
     public GameObject CanoDaArma;
     public AudioClip SomDoTiro;
 
-	// Use this for initialization
-	void Start () {
-		
-	}
+    [SerializeField]
+    private ReservaExtensivel reserva;
 	
 	// Update is called once per frame
 	void Update () {
-		if(Input.GetButtonDown("Fire1"))
+
+        var toquesNaTela = Input.touches;
+
+        foreach (var toque in toquesNaTela)
         {
-            Instantiate(Bala, CanoDaArma.transform.position, CanoDaArma.transform.rotation);
-            ControlaAudio.instancia.PlayOneShot(SomDoTiro);
+            if(toque.phase == TouchPhase.Began)
+            {
+                Atirar();
+                ControlaAudio.instancia.PlayOneShot(SomDoTiro);
+            }
         }
 	}
+
+    private void Atirar()
+    {
+        //Instantiate(Bala, CanoDaArma.transform.position, CanoDaArma.transform.rotation);
+        if (reserva.TemObjeto())
+        {
+            GameObject bala = reserva.PegarObjeto();
+            bala.transform.position = CanoDaArma.transform.position;
+            bala.transform.rotation = CanoDaArma.transform.rotation;
+            
+        }
+    }
 }
