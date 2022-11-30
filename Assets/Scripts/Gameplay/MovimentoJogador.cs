@@ -18,7 +18,5 @@ public class MovimentoJogador : MovimentoPersonagem
             posicaoMiraJogador.y = transform.position.y;
             Rotacionar(posicaoMiraJogador);
         }
-
-
     }
 }

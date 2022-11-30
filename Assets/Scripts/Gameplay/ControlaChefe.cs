@@ -55,13 +55,14 @@ public class ControlaChefe : MonoBehaviour, IMatavel, IReservavel
 
         if (agente.hasPath == true)
         {
+            Vector3 direcao = jogador.position - transform.position;
+            movimentoChefe.Rotacionar(direcao);
+
             bool estouPertoDoJogador = agente.remainingDistance <= agente.stoppingDistance;
 
             if (estouPertoDoJogador)
             {
                 animacaoChefe.Atacar(true);
-                Vector3 direcao = jogador.position - transform.position;
-                movimentoChefe.Rotacionar(direcao);
             }
             else
             {

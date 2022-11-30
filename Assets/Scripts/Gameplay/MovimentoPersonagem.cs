@@ -11,6 +11,7 @@ public class MovimentoPersonagem : MonoBehaviour
     void Awake ()
     {
         meuRigidbody = GetComponent<Rigidbody>();
+        //this.Direcao = Vector3.forward;
     }
 
     public void SetDirecao(Vector2 direcao)
@@ -20,7 +21,16 @@ public class MovimentoPersonagem : MonoBehaviour
 
     public void SetDirecao(Vector3 direcao)
     {
-        this.Direcao = direcao.normalized;
+        //if(direcao != Vector3.zero && direcao.magnitude > 0.05)
+        if (direcao.sqrMagnitude > 0.05)
+        {
+            this.Direcao = direcao.normalized;
+            this.Direcao = new Vector3(Direcao.x, 0, Direcao.z);
+        }
+        else
+        {
+            this.Direcao = Vector3.forward;
+        }
     }
 
     public void Movimentar (float velocidade)
@@ -33,9 +43,12 @@ public class MovimentoPersonagem : MonoBehaviour
 
     public void Rotacionar (Vector3 direcao)
     {
-        if (direcao != Vector3.zero)
+        //if (direcao != Vector3.zero)
+        if (direcao.sqrMagnitude > 0.05)
         {
-            Quaternion novaRotacao = Quaternion.LookRotation(direcao);
+            var direcaoNormalizada = direcao.normalized;
+            direcaoNormalizada.y = 0;
+            Quaternion novaRotacao = Quaternion.LookRotation(direcaoNormalizada);
             meuRigidbody.MoveRotation(novaRotacao);
         }
     }
@@ -52,5 +65,6 @@ public class MovimentoPersonagem : MonoBehaviour
     {
         meuRigidbody.isKinematic = false;
         GetComponent<Collider>().enabled = true;
+        //this.Direcao = Vector3.forward;
     }
 }

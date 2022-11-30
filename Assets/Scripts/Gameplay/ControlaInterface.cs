@@ -74,6 +74,11 @@ public class ControlaInterface : MonoBehaviour {
         SceneManager.LoadScene("game");
     }
 
+    public void Sair()
+    {
+        SceneManager.LoadScene("menu");
+    }
+
     public void AparecerTextoChefeCriado ()
     {
         StartCoroutine(DesaparecerTexto(2, TextoChefeAparece));
