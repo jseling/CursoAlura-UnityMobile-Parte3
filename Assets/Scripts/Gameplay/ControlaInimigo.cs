@@ -78,7 +78,7 @@ public class ControlaInimigo : MonoBehaviour, IMatavel, IReservavel
             contadorVagar += tempoEntrePosicoesAleatorias + Random.Range(-1f, 1f);
         }
 
-        bool ficouPertoOSuficiente = Vector3.Distance(transform.position, posicaoAleatoria) <= 0.05;
+        bool ficouPertoOSuficiente = Vector3.Distance(transform.position, posicaoAleatoria) <= 0.5;
         if (ficouPertoOSuficiente == false)
         {
             direcao = posicaoAleatoria - transform.position;
